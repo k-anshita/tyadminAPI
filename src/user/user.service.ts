@@ -15,22 +15,23 @@ export class UserService {
 
   async register(model: RegisterDetail): Promise<swagger_api_response> {
     const user = await this._userRepository.findOne({ where: { email: model.email, username: model.username } });
-    // const userfeild = this._userRepository.findOne({
-    //   where: {
-    //     firstname: IsNull(),
-    //     lastname: IsNull(),
-    //     email: IsNull(),
-    //     username: IsNull(),
-    //     password: IsNull(),
-    //     gender: IsNull(),
-    //     date: IsNull()
-    //   }
-    // });
     if (model.firstname == null || model.lastname == null || model.date == null
       || model.email == null || model.gender == null || model.username == null
       || model.password == null) {
       throw new Error('All Feilds are complusory,please fill it');
     }
+   
+    // if (
+    //   !String(model.firstname || '').trim() &&
+    //   !String(model.lastname || '').trim() &&
+    //   !String(model.date || '').trim() &&
+    //   !String(model.email || '').trim() &&
+    //   !String(model.gender || '').trim() &&
+    //   !String(model.username || '').trim() &&
+    //   !String(model.password || '').trim()
+    // ) {
+    //   throw new Error('All Fields are compulsory,please fill it');
+    // }
 
     if (user) {
       throw new Error('You have alredy registered, Please try to login');
@@ -44,6 +45,7 @@ export class UserService {
         email: model.email,
         username: model.username,
         password: model.password,
+        // conformPassword: model.conformPassword,
         gender: model.gender,
         date: model.date,
         createdBy: 0,
@@ -57,6 +59,20 @@ export class UserService {
       data.isSuccess = true;
       data.message = 'You are registered successfully.';
       return data;
+    }
+  }
+
+  async getUserRegisterDetail(): Promise<swagger_api_response> {
+    const userData = await this._userRepository.find();
+    if (userData) {
+      const data = new swagger_api_response();
+      data.code = 200;
+      data.isSuccess = true;
+      data.message = 'game report is added!';
+      data.data = userData;
+      return data;
+    } else {
+      throw new Error('user does not exists');
     }
   }
 
@@ -92,22 +108,11 @@ export class UserService {
   //       return 'success'
   //     }
   //   })
-   
+
   //   }
 
   async profile(model: RegisterDetail): Promise<swagger_api_response> {
     const user = await this._userRepository.findOne({ where: { id: model.id, username: model.username } });
-    // const userfeild = this._userRepository.findOne({
-    //   where: {
-    //     firstname: IsNull(),
-    //     lastname: IsNull(),
-    //     email: IsNull(),
-    //     username: IsNull(),
-    //     password: IsNull(),
-    //     gender: IsNull(),
-    //     date: IsNull()
-    //   }
-    // });
     if (model.firstname == null || model.lastname == null || model.date == null ||
       model.gender == null) {
       throw new Error('All Fields are compulsory, please fill it');

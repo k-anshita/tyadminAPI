@@ -52,4 +52,18 @@ export class ReveiwService {
       return data;
     }
   }
+
+  async getReview(): Promise<swagger_api_response> {
+    const review = await this._reviewRepository.find();
+    if (review) {
+      const data = new swagger_api_response();
+      data.code = 200;
+      data.isSuccess = true;
+      data.message = 'game report is added!';
+      data.data = review;
+      return data;
+    } else {
+      throw new Error('user does not exists');
+    }
+  }
 }

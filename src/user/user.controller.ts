@@ -15,9 +15,14 @@ export class UserController {
     return await this.userService.register(model);
   }
 
+  @Get('userHistory')
+  getUserRegisterDetail(): Promise<swagger_api_response> {
+    return this.userService.getUserRegisterDetail();
+  }
+
   @Post('login')
   async login(@Body() model: LoginDetail): Promise<swagger_api_response> {
-    return await this.userService.login(model)
+    return await this.userService.login(model);
   }
 
   @Put('profile')
@@ -29,5 +34,4 @@ export class UserController {
   async deleteProfile(@Param('id', new ParseIntPipe()) id: number): Promise<NewType> {
     return await this.userService.deleteProfile(id);
   }
-
 }

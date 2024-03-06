@@ -13,6 +13,10 @@ import { CardgamesModule } from './cardgames/cardgames.module';
 import { NumbergamesModule } from './numbergames/numbersgames.module';
 import { TicgamesModule } from './ticgames/ticgames.module';
 import { ReviewModule } from './review/review.module';
+import { PaymentModule } from './payment/payment.module';
+import { Payment } from './payment/payment.entity';
+import { Otp } from './otp/otp.entity';
+import { OtpModule } from './otp/otp.module';
 
 @Module({
   imports: [
@@ -23,16 +27,27 @@ import { ReviewModule } from './review/review.module';
       username: 'root',
       password: 'archivirani01',
       database: 'gaming',
-      entities: [User, Cardgames, Ticgames, Numbergames, Review, Role],
+      entities: [
+        User,
+        Cardgames,
+        Ticgames,
+        Numbergames,
+        Review,
+        Role,
+        Payment,
+        Otp,
+      ],
       synchronize: true,
     }),
     UserModule,
     CardgamesModule,
     NumbergamesModule,
     TicgamesModule,
-    ReviewModule
+    ReviewModule,
+    PaymentModule,
+    OtpModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

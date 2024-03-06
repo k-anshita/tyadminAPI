@@ -15,4 +15,8 @@ export class ReviewController {
     return this.reviewService.review(model);
   }
 
+  @Get('reviewHistory')
+  getReview(): Promise<swagger_api_response> {
+    return this.reviewService.getReview();
+  }
 }

@@ -1,8 +1,9 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { max } from "rxjs";
 import { Role } from "src/role/role.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class User {
+export class Payment {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -11,28 +12,19 @@ export class User {
     role: Role
 
     @Column()
-    firstname: string;
+    cardName: string;
 
     @Column()
-    lastname: string;
+    cardNumber: string;
 
     @Column()
-    email: string;
+    expMonth: number;
 
     @Column()
-    username: string;
+    expYear: number;
 
     @Column()
-    gender: string;
-
-    @Column()
-    date: Date;
-
-    @Column()
-    password: string;
-
-    // @Column()
-    // conformPassword: string;
+    cvv: string;
 
     @Column({ default: true })
     isActive: boolean;

@@ -13,8 +13,11 @@ export class RegisterDetail {
     username: string;
     @ApiProperty()
     password: string;
+    // @ApiProperty()
+    // conformPassword: string;
     @ApiProperty()
     gender: string;
+    photo: string;
     @ApiProperty()
     date: string;
 }
